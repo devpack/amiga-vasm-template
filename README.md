@@ -9,3 +9,18 @@ make clean
 Assume fs-uae is in the $PATH
 
 
+Note: building vasm and vlink
+
+wget http://server.owl.de/~frank/tags/vasm1_8e.tar.gz  
+tar xfz vasm1_8e.tar.gz  
+cd vasm  
+make CPU=m68k SYNTAX=mot  
+
+wget http://server.owl.de/~frank/tags/vlink0_16b.tar.gz  
+tar xfz vlink0_16b.tar.gz  
+cd vlink  
+make CPU=m68k SYNTAX=mot  
+
+
+
+
