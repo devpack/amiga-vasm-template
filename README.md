@@ -3,7 +3,7 @@
 git clone https://github.com/devpack/amiga-vasm-template.git  
 cd amiga-vasm-template  
 make  
-make run  
+make run-a500 (or make run-a1200)  
 make clean  
 
 Assume fs-uae is in the $PATH

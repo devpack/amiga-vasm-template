@@ -1,28 +1,16 @@
-;---------- Constantes ----------
+;---------------------
 
-;Registres
+    ;include "./registers.i"
 
-INTENA=$09A
-INTENAR=$01C
-INTREQ=$09C
-INTREQR=$01E
-DMACON=$096
-DMACONR=$002
-COLOR00=$dff180
-C_COLOR00=$180
-COP1LCH=$dff080
-COP1LCL=$dff082
-COPJMP1=$dff088
-VPOSR=$dff004
 
-;Programme
+color00=$180
 
 COPPERLIST_SIZE=1000		;Size of the copperlist
 LINE=10			;<= 255
 
 init:
-              move.l     4.w,a6                  ; execbase
-              clr.l      d0                      
+              move.l    4.w,a6                  ; execbase
+              moveq.l   #0,d0              
 
 	; Allocation of chip memory
 
@@ -51,17 +39,17 @@ init:
               move.w     #$100,(a0)+
               move.w     #$0200,(a0)+            ; wait for screen start
 
-              move.w     #C_COLOR00,(a0)+
+              move.w     #color00,(a0)+
               move.w     #$349,(a0)+
 
               move.w     #$2b07,(a0)+
               move.w     #$fffe,(a0)+           
-              move.w     #C_COLOR00,(a0)+
+              move.w     #color00,(a0)+
               move.w     #$56c,(a0)+
               move.w     #$2c07,(a0)+
               move.w     #$fffe,(a0)+           
 
-              move.w     #C_COLOR00,(a0)+
+              move.w     #color00,(a0)+
               move.w     #$113,(a0)+
 
 ;Copy copper bar
@@ -72,7 +60,7 @@ init:
 loopbar:
               move.w     d3,(a0)+
               move.w     #$fffe,(a0)+       
-              move.w     #C_COLOR00,(a0)+
+              move.w     #color00,(a0)+
               move.w     d1,(a0)+        
               add        #$0100,d3
               add        #$010,d1
@@ -82,7 +70,7 @@ loopbar:
 loopbar2:
               move.w     d3,(a0)+
               move.w     #$fffe,(a0)+   
-              move.w     #C_COLOR00,(a0)+
+              move.w     #color00,(a0)+
               move.w     d1,(a0)+  
               add        #$0100,d3
               sub        #$010,d1
@@ -91,7 +79,7 @@ loopbar2:
               move.l     a0,waitras2
               move.w     d3,(a0)+
               move.w     #$fffe,(a0)+ 
-              move.w     #C_COLOR00,(a0)+
+              move.w     #color00,(a0)+
               move.w     #$113,(a0)+  
 
 ; End of copper bar
@@ -99,11 +87,11 @@ loopbar2:
               move.w     #$fffe,(a0)+ 
               move.w     #$2c07,(a0)+
               move.w     #$fffe,(a0)+ 
-              move.w     #C_COLOR00,(a0)+
+              move.w     #color00,(a0)+
               move.w     #$aaa,(a0)+             ; background color
               move.w     #$2d07,(a0)+
               move.w     #$fffe,(a0)+ 
-              move.w     #C_COLOR00,(a0)+
+              move.w     #color00,(a0)+
               move.w     #$349,(a0)+
 
               move.w     #$ffdf,(a0)+
@@ -116,7 +104,7 @@ loopbar2:
 ; Activate Copper list
 
               move.l     copperlist,$dff080
-              clr.w      COPJMP1
+              clr.w      $dff088
 
 resetcount:
               moveq      #$50,d2                 ; cycle duration
